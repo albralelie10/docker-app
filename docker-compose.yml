@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  web-app:
+    build:
+      context: ./client/client-ap
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+  server-app:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    links:
+      - mon
+  mon:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=yosaba
+      - MONGO_INITDB_ROOT_PASSWORD=9988
+
+
+
+
